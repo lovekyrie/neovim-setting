@@ -40,10 +40,11 @@ function M:pop_progress_handle(id)
 end
 
 function M:create_progress_handle(request)
+  local mode = request.data.strategy or request.data.mode or request.data.interaction or "chat"
   return progress.handle.create({
     title = "",
-    -- title = " Thinking... (" .. request.data.strategy .. ")",
-    message = " Thinking... (" .. request.data.strategy .. ")",
+    -- title = " Thinking... (" .. mode .. ")",
+    message = " Thinking... (" .. mode .. ")",
     lsp_client = {
       name = M:llm_role_title(request.data.adapter),
     },

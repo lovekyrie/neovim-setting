@@ -127,8 +127,8 @@ code.setup({
           name = "copilot_claude",
           schema = {
             model = {
-              -- default = "claude-sonnet-4",
-              default = "gpt-4.1",
+              default = "claude-sonnet-4",
+              -- default = "gpt-4.1",
             },
           },
         })
@@ -206,9 +206,9 @@ code.setup({
     },
   },
 
-  strategies = {
+  interactions = {
     -- chat = { adapter = "openrouter_claude" },
-    chat = { adapter = "copilot" },
+    chat = { adapter = "copilot_claude" },
     inline = { adapter = "copilot" },
   },
 

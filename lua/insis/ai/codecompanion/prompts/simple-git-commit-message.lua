@@ -1,11 +1,11 @@
 return {
-  strategy = "chat",
+  interaction = "chat",
   description = "Simple Git Commit Message",
   opts = {
     index = 10,
     is_default = true,
     is_slash_cmd = true,
-    short_name = "commit",
+    alias = "commit",
     auto_submit = true,
   },
   prompts = {

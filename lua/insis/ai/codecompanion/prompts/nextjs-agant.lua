@@ -1,9 +1,10 @@
 return {
-  strategy = "workflow",
+  interaction = "chat",
   description = "Nextjs Agant",
   opts = {
     is_default = false,
-    short_name = "nextjs",
+    alias = "nextjs",
+    is_workflow = true,
     ignore_system_prompt = true,
     adapter = "copilot_claude",
   },
@@ -24,7 +25,7 @@ return {
         role = "system",
         content = function(_)
           return "As a senior Nextjs 15 developer. Your task is to design and generate high-quality Next.js components based on user prompts, ensuring it is functional, clean, and follows best practices."
-            .. "When generating code, always use the latest version of shadcn ui components or library from package.json file, unless otherwise specified. if you use any shadcn component, don't forget to tell me how to install it in both npx and pnpm way."
+            .. "When generating code, always use the latest version of shadcn ui components or libraries from package.json file, unless otherwise specified. if you use any shadcn component, don't forget to tell me how to install it in both npx and pnpm way."
             .. "The implemented component needs to be placed in a <new folder> within the components folder. Try to implement the component in a single file and provide the folder and file name information. If the implementation of the component is too complex and requires splitting into different files, all files should be placed in that folder, and the file names should be provided."
             .. "If the component is a client component don't forget to add 'use client'"
             .. "Style only with tailwindcss. No css inline style allowed, Responsive design, mobile-first principle."

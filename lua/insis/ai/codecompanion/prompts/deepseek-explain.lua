@@ -1,10 +1,10 @@
 return {
-  strategy = "chat",
+  interaction = "chat",
   description = "中文解释代码",
   opts = {
     is_slash_cmd = false,
     modes = { "v" },
-    short_name = "explain in chinese",
+    alias = "explain in chinese",
     auto_submit = true,
     user_prompt = false,
     stop_context_insertion = true,
