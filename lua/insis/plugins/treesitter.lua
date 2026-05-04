@@ -50,9 +50,9 @@ if treesitter then
     },
     -- nvim-treesitter/nvim-treesitter-refactor
     refactor = {
+      -- Nvim 0.12+ 下 find_usages 可能传 nil 给 vim.treesitter.get_node_text，CursorHold 报错
       highlight_definitions = {
-        enable = true,
-        -- Set to false if you have an `updatetime` of ~100.
+        enable = false,
         clear_on_cursor_move = true,
       },
       highlight_current_scope = { enable = false },

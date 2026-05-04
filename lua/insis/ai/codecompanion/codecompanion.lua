@@ -150,7 +150,7 @@ code.setup({
           name = "openrouter_claude",
           env = {
             url = "https://openrouter.ai/api",
-            api_key = "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",
+            api_key = "sk-or-v1-xxxxx",
             chat_url = "/v1/chat/completions",
           },
           schema = {

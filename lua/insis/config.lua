@@ -187,7 +187,7 @@ local InsisUserConfig = {
       -- open / close --
       edit = { "o", "<2-LeftMouse>" },
       close = "<BS>", -- close parent folder
-      system_open = "<CR>",
+      system_open = "<CR>", -- carriage return, enter key is <CR>
       vsplit = "sv",
       split = "sh",
       tabnew = "st",
@@ -241,7 +241,7 @@ local InsisUserConfig = {
 
   ---@class InsisSurroundConfig
   ---@field enable? boolean
-  ---@field keys? {normal:string, normal_cur:string, delete:string, change:string, visual:string, visual_line:string, insert:any, insert_line:any, normal_line:any, normal_cur_line:any}
+  ---@field keys? {normal:string, normal_cur:string, delete:string, change:string, change_line?:string|false, visual:string, visual_line:string, insert:any, insert_line:any, normal_line:any, normal_cur_line:any}
   surround = {
     enable = true,
     keys = {
@@ -251,6 +251,7 @@ local InsisUserConfig = {
       normal_cur = "yss",
       delete = "ds",
       change = "cs",
+      change_line = "cS", -- v4 默认，整行替换包围
       -- visual mode
       visual = "s",
       visual_line = "gs",

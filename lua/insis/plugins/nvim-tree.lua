@@ -76,12 +76,6 @@ if nvimTree and cfg and cfg.enable then
         quit_on_open = false,
       },
     },
-    system_open = {
-      -- NOTE: WSL need wsl-open
-      -- npm install -g wsl-open
-      -- https://github.com/4U6U57/wsl-open/
-      cmd = isWSL() and "wsl-open" or "open",
-    },
     renderer = {
       root_folder_label = false,
       indent_markers = {
@@ -97,5 +91,32 @@ if nvimTree and cfg and cfg.enable then
         git_placement = "after",
       },
     },
+  })
+
+  -- 0.12 目录 buffer 可能是 file://…，内置 hijack 里 isdirectory(原名) 失败，树不自动出
+  vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
+    group = vim.api.nvim_create_augroup("insis_nvim_tree_uri_dir", { clear = true }),
+    nested = true,
+    callback = function(args)
+      local raw = vim.api.nvim_buf_get_name(args.buf)
+      if raw == "" or vim.api.nvim_get_current_buf() ~= args.buf then
+        return
+      end
+      if vim.fn.isdirectory(raw) == 1 then
+        return
+      end
+      if not raw:find("://", 1, true) then
+        return
+      end
+      local ok, path = pcall(vim.uri_to_fname, raw)
+      if not ok or not path or vim.fn.isdirectory(path) ~= 1 then
+        return
+      end
+      vim.schedule(function()
+        if vim.api.nvim_get_current_buf() == args.buf then
+          pcall(require("nvim-tree.actions.tree.open").open_on_directory, path)
+        end
+      end)
+    end,
   })
 end

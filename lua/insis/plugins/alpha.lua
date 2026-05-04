@@ -210,7 +210,7 @@ local nvimInfoSection = {
 
 local versionSection = {
   type = "text",
-  val = require("insis").version .. " make with ♥ by nshen",
+  val = require("insis").version .. " make with ♥ by lovekyrie",
   opts = {
     position = "center",
     hl = "Type",
@@ -231,6 +231,8 @@ local config = {
   },
   opts = {
     margin = 5,
+    -- 关闭内置 VimEnter 自动打开：0.12 与其它插件竞态时 should_skip_alpha 易误判
+    autostart = false,
     setup = function()
       vim.api.nvim_create_autocmd("DirChanged", {
         pattern = "*",
@@ -243,6 +245,42 @@ local config = {
 }
 
 alpha.setup(config)
+
+vim.api.nvim_create_autocmd("VimEnter", {
+  group = vim.api.nvim_create_augroup("insis_alpha_deferred", { clear = true }),
+  once = true,
+  nested = true,
+  callback = function()
+    vim.schedule(function()
+      if vim.fn.argc() > 0 then
+        return
+      end
+      if vim.bo.filetype == "alpha" then
+        return
+      end
+      local bufnr = vim.api.nvim_get_current_buf()
+      local raw = vim.api.nvim_buf_get_name(bufnr)
+      local path = raw
+      if raw ~= "" and raw:find("://", 1, true) then
+        local ok, conv = pcall(vim.uri_to_fname, raw)
+        if ok and conv and conv ~= "" then
+          path = conv
+        end
+      end
+      if path ~= "" and vim.fn.isdirectory(path) == 1 then
+        return
+      end
+      local lines = vim.api.nvim_buf_get_lines(bufnr, 0, 2, false)
+      if #lines > 1 then
+        return
+      end
+      if #lines == 1 and vim.trim(lines[1]) ~= "" then
+        return
+      end
+      alpha.start(false, config)
+    end)
+  end,
+})
 
 -- return {
 --   header = header,

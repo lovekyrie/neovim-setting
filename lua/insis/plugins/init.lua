@@ -3,7 +3,7 @@ local cfg = require("insis").config
 local plugins = {
   -------------------------- plugins -------------------------------------------
   -- requires
-  { "kyazdani42/nvim-web-devicons" },
+  { "nvim-tree/nvim-web-devicons" },
   { "moll/vim-bbye" },
   { "nvim-lua/plenary.nvim" },
   -- nvim-notify
@@ -60,6 +60,7 @@ local plugins = {
   -- treesitter
   {
     "HiPhish/rainbow-delimiters.nvim",
+    submodules = false, -- test 子模块在 GitLab，TLS 易失败；运行插件不需要
     config = function()
       require("insis.plugins.rainbow-delimiters")
     end,
@@ -79,8 +80,14 @@ local plugins = {
   { "nvim-treesitter/nvim-treesitter-textobjects" },
   { "RRethy/nvim-treesitter-endwise" },
 
-  -- Comment
-  { "JoosepAlviste/nvim-ts-context-commentstring" },
+  -- Comment（见 ts-context-commentstring.lua：兼容 Nvim 0.12 get_parser 返回 nil）
+  {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = function()
+      require("insis.plugins.ts-context-commentstring").apply()
+    end,
+  },
   {
     "numToStr/Comment.nvim",
     config = function()
@@ -113,9 +120,12 @@ local plugins = {
     end,
   },
 
-  -- nvim-surround
+  -- nvim-surround（v4 需在 plugin 加载前关默认键位，键位改在 lua 里绑 <Plug>）
   {
     "kylechui/nvim-surround",
+    init = function()
+      vim.g.nvim_surround_no_mappings = true
+    end,
     config = function()
       require("insis.plugins.nvim-surround")
     end,
@@ -223,10 +233,10 @@ local plugins = {
   { "saadparwaiz1/cmp_luasnip" },
   -- Completion sources
   { "hrsh7th/cmp-vsnip" },
-  { "hrsh7th/cmp-nvim-lsp" }, -- { name = nvim_lsp }
-  { "hrsh7th/cmp-buffer" }, -- { name = 'buffer' },
-  { "hrsh7th/cmp-path" }, -- { name = 'path' }
-  { "hrsh7th/cmp-cmdline" }, -- { name = 'cmdline' }
+  { "hrsh7th/cmp-nvim-lsp" },                -- { name = nvim_lsp }
+  { "hrsh7th/cmp-buffer" },                  -- { name = 'buffer' },
+  { "hrsh7th/cmp-path" },                    -- { name = 'path' }
+  { "hrsh7th/cmp-cmdline" },                 -- { name = 'cmdline' }
   { "hrsh7th/cmp-nvim-lsp-signature-help" }, -- { name = 'nvim_lsp_signature_help' }
   -- common snippets
   { "rafamadriz/friendly-snippets" },
@@ -329,7 +339,7 @@ local plugins = {
   -- go
   { "leoluz/nvim-dap-go" },
 
-  --[[ 
+  --[[
   -- TODO: python not work yet
 
   {
@@ -405,7 +415,7 @@ if cfg.rust.enable then
   table.insert(plugins, {
     "mrcjkb/rustaceanvim",
     version = "^5", -- Recommended
-    lazy = false, -- This plugin is already lazy
+    lazy = false,   -- This plugin is already lazy
   })
 end
 

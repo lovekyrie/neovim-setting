@@ -30,6 +30,11 @@ keymap("n", keys.n_force_quit, "<CMD>qa!<CR>")
 keymap({ "v", "n" }, "$", "g_")
 keymap({ "v", "n" }, "g_", "$")
 
+-- ^ jump to the start  use shift-h
+keymap({ "n", "v" }, "H", "^")
+-- g_ jump to the end  use shift-l
+keymap({ "n", "v" }, "L", "g_")
+
 keymap({ "n", "v" }, keys.n_v_5j, "5j")
 keymap({ "n", "v" }, keys.n_v_5k, "5k")
 
