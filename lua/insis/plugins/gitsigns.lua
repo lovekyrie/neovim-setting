@@ -86,8 +86,8 @@ if gitsigns and cfg and cfg.enable then
     current_line_blame = cfg.current_line_blame, -- Toggle with `:Gitsigns toggle_current_line_blame`
     current_line_blame_opts = {
       virt_text = true,
-      virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
-      delay = 1000,
+      virt_text_pos = "eol", -- 靠右显示，接近 VS Code GitLens
+      delay = 400,
       ignore_whitespace = false,
       virt_text_priority = 100,
     },
@@ -104,7 +104,6 @@ if gitsigns and cfg and cfg.enable then
       row = 0,
       col = 1,
     },
-    -- I'm not gona remember these keys for now, let's use code action
-    -- on_attach = gitsigns_on_attach,
+    on_attach = gitsigns_on_attach,
   })
 end
