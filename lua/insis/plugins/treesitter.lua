@@ -5,8 +5,47 @@ local treesitterQuery = pRequire("nvim-treesitter.query")
 if not treesitterQuery then
   return
 end
+
+local function patch_markdown_injections_for_nvim_012()
+  if vim.fn.has("nvim-0.12") == 0 then
+    return
+  end
+
+  -- Work around nvim-treesitter master bug on Nvim 0.12.x:
+  -- fenced code blocks can crash in query_predicates.lua via
+  -- set-lang-from-info-string! during redraw/scroll.
+  pcall(vim.treesitter.query.set, "markdown", "injections", [[
+(fenced_code_block
+  (info_string
+    (language) @injection.language)
+  (code_fence_content) @injection.content)
+
+((html_block) @injection.content
+  (#set! injection.language "html")
+  (#set! injection.combined)
+  (#set! injection.include-children))
+
+((minus_metadata) @injection.content
+  (#set! injection.language "yaml")
+  (#offset! @injection.content 1 0 -1 0)
+  (#set! injection.include-children))
+
+((plus_metadata) @injection.content
+  (#set! injection.language "toml")
+  (#offset! @injection.content 1 0 -1 0)
+  (#set! injection.include-children))
+
+([
+  (inline)
+  (pipe_table_cell)
+] @injection.content
+  (#set! injection.language "markdown_inline"))
+]])
+end
+
 if treesitter then
   pRequire("nvim-treesitter.install").prefer_git = true
+  patch_markdown_injections_for_nvim_012()
 
   treesitter.setup({
     sync_install = false,
