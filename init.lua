@@ -1,1 +1,5 @@
-require("insis").setup({})
+require("insis").setup({
+  frontend = {
+    enable = true,
+  },
+})
