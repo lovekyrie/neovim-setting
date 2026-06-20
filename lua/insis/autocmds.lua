@@ -23,11 +23,17 @@ autocmd("TermOpen", {
   command = "startinsert",
 })
 
--- format on save
+-- format on save (eslint formatter 由 insis/lsp/config/eslint.lua 在 on_attach 中处理)
 autocmd("BufWritePre", {
   group = myAutoGroup,
   pattern = require("insis.env").getFormatOnSavePattern(),
   callback = function()
+    if vim.bo.buftype ~= "" or not vim.bo.modifiable then
+      return
+    end
+    if cfg.frontend.enable and cfg.frontend.formatter == "eslint" then
+      return
+    end
     vim.lsp.buf.format()
   end,
 })
