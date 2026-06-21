@@ -4,4 +4,7 @@ require("insis").setup({
     format_on_save = true,
     formatter = "eslint",
   },
+  golang = {
+    enable = true,
+  }
 })

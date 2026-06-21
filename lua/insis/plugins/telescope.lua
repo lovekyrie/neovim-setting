@@ -28,6 +28,7 @@ if telescope and lga_actions and cfg and cfg.enable then
     pickers = {
       find_files = {
         -- theme = "dropdown", -- can be : dropdown, cursor, ivy
+        hidden = true,
       },
     },
     extensions = {
