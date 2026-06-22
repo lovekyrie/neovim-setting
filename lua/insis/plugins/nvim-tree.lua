@@ -52,15 +52,14 @@ if nvimTree and cfg and cfg.enable then
       enable = false,
       update_root = false,
     },
-    git = {
-      enable = true,
-      ignore = true,
-    },
     filters = {
-      -- hide dot files
+      enable = true,
+      -- this config opened will hide all settings file or files in .gitignore file
+      git_ignored = true,
+      -- do not hide dot files
       dotfiles = false,
       -- keep frontend env files visible even when they are ignored by git
-      exclude = { "/%.env.*$" },
+      exclude = { "/%.env.*$", "dist" },
       -- hide node_modules folder
       -- custom = { "node_modules" },
     },
