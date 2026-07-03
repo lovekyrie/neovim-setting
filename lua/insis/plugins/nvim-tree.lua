@@ -49,7 +49,7 @@ if nvimTree and cfg and cfg.enable then
   nvimTree.setup({
     on_attach = on_attach,
     update_focused_file = {
-      enable = false,
+      enable = true,
       update_root = false,
     },
     filters = {

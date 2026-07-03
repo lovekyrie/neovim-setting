@@ -109,15 +109,3 @@ end
 -- Esc back to Normal mode
 keymap("t", keys.terminal_to_normal, "<C-\\><C-n>")
 
--- DEPRECATED :Terminal kes
-
--- map("n", "st", ":sp | terminal<CR>", opt)
--- map("n", "stv", ":vsp | terminal<CR>", opt)
--- map("t", "<A-h>", [[ <C-\><C-N><C-w>h ]], opt)
--- map("t", "<A-j>", [[ <C-\><C-N><C-w>j ]], opt)
--- map("t", "<A-k>", [[ <C-\><C-N><C-w>k ]], opt)
--- map("t", "<A-l>", [[ <C-\><C-N><C-w>l ]], opt)
--- map("t", "<leader>h", [[ <C-\><C-N><C-w>h ]], opt)
--- map("t", "<leader>j", [[ <C-\><C-N><C-w>j ]], opt)
--- map("t", "<leader>k", [[ <C-\><C-N><C-w>k ]], opt)
--- map("t", "<leader>l", [[ <C-\><C-N><C-w>l ]], opt)
