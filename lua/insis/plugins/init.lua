@@ -49,6 +49,14 @@ local plugins = {
     end,
   },
 
+  -- EasyMotion: labelled long-distance jumps
+  {
+    "easymotion/vim-easymotion",
+    config = function()
+      require("insis.plugins.easymotion")
+    end,
+  },
+
   -- alpha.nvim
   {
     "goolord/alpha-nvim",

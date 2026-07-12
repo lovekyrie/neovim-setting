@@ -12,6 +12,7 @@
 | `H` / `L` | 跳转到行首/行尾 |
 | `<C-j>` / `<C-k>` | 5行下/上移动 |
 | `<C-d>` / `<C-u>` | 10行下/上移动 |
+| `<leader>d` / `<leader>u` | 向下/向上滚动一屏 |
 | `<Esc>` | Terminal 切换到 Normal 模式 |
 
 ### 窗口操作 (`s` 前缀)
@@ -76,6 +77,19 @@
 | `<C-p>` / `ff` | 查找文件 |
 | `<C-f>` | 全局搜索 |
 | `<C-j>` / `<C-k>` | 下/上选择项 |
+
+---
+
+## EasyMotion
+
+| 按键 | 功能 |
+|------|------|
+| `<leader><leader>w` | 跳到后方单词开头 |
+| `<leader><leader>e` | 跳到后方单词结尾 |
+| `<leader><leader>b` | 跳到前方单词开头 |
+| `<leader><leader>ge` | 跳到前方单词结尾 |
+| `<leader><leader>j` / `<leader><leader>k` | 向下/向上按行跳转 |
+| `<leader><leader>s` | 输入两个字符后跳到匹配位置 |
 
 ---
 

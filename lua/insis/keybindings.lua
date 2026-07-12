@@ -63,6 +63,10 @@ local opts_expr = {
 keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", opts_expr)
 keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", opts_expr)
 
+-- full-page scrolling without conflicting with Telescope <C-f>
+keymap("n", "<leader>d", "<C-f>")
+keymap("n", "<leader>u", "<C-b>")
+
 -- visual模式下缩进代码
 keymap("v", "<", "<gv")
 keymap("v", ">", ">gv")
@@ -108,4 +112,3 @@ end
 
 -- Esc back to Normal mode
 keymap("t", keys.terminal_to_normal, "<C-\\><C-n>")
-
