@@ -28,7 +28,7 @@ return function(config)
         table.insert(list, "prismals")
       end
       if config.vue then
-        table.insert(list, "volar")
+        table.insert(list, "vue_ls")
       end
       if config.linter == "biome" then
         table.insert(list, "biome")
@@ -55,7 +55,7 @@ return function(config)
         list.tailwindcss = require("insis.lsp.config.tailwindcss")
       end
       if config.vue then
-        list.volar = require("insis.lsp.config.volar")
+        list.vue_ls = require("insis.lsp.config.volar")
       end
       if config.prisma then
         list.prismals = require("insis.lsp.config.prismals")

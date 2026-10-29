@@ -3,7 +3,8 @@ require("insis").setup({
     enable = true,
     format_on_save = true,
     formatter = "eslint",
-  },
+    vue = true,
+},
   golang = {
     enable = true,
   }
