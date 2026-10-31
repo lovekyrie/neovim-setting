@@ -42,14 +42,14 @@ local function n_expr(lhs, p, desc)
   if not lhs or lhs == false then
     return
   end
-  vim.keymap.set("n", lhs, p, vim.tbl_extend("force", { desc = desc, expr = true }, base))
+  vim.keymap.set("n", lhs, p, vim.tbl_extend("force", { desc = desc }, base))
 end
 
 local function x_expr(lhs, p, desc)
   if not lhs or lhs == false then
     return
   end
-  vim.keymap.set("x", lhs, p, vim.tbl_extend("force", { desc = desc, expr = true }, base))
+  vim.keymap.set("x", lhs, p, vim.tbl_extend("force", { desc = desc }, base))
 end
 
 local function i_map(lhs, p, desc)
