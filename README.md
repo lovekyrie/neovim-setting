@@ -297,6 +297,9 @@ require("insis").setup({
 
 <details>
 <summary>Markdown 编辑</summary>
+
+Markdown 文件中可直接在 `[文字](路径)` 链接上按 `gf` 打开目标，按 `Ctrl+o` 返回。
+相对路径以当前 Markdown 文件所在目录为基准；此功能无需启用下面的完整 Markdown 工具链。
   
 ```lua
 require("insis").setup({

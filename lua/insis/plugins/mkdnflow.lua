@@ -2,12 +2,16 @@
 local mkdnflow = pRequire("mkdnflow")
 local cfg = require("insis").config.markdown
 
-if mkdnflow and cfg and cfg.enable then
+-- Link navigation is available independently of the full Markdown toolchain.
+if mkdnflow and cfg then
   mkdnflow.setup({
     modules = {
       maps = false,
     },
     filetypes = { md = true, mdx = true, markdown = true },
+    path_resolution = {
+      primary = "current",
+    },
     links = {
       style = "markdown",
       implicit_extension = nil,
@@ -29,6 +33,10 @@ if mkdnflow and cfg and cfg.enable then
     pattern = { "markdown", "md", "mdx" },
     callback = function()
       local opts = { buffer = vim.api.nvim_get_current_buf() }
+      keymap("n", "gf", "<cmd>MkdnFollowLink<CR>", opts)
+      if not cfg.enable then
+        return
+      end
       keymap("n", cfg.mkdnflow.next_link, "<cmd>MkdnNextLink<CR>", opts)
       keymap("n", cfg.mkdnflow.prev_link, "<cmd>MkdnPrevLink<CR>", opts)
       keymap("n", cfg.mkdnflow.prev_heading, "<cmd>MkdnPrevHeading<CR>", opts)
