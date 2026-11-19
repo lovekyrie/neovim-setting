@@ -7,5 +7,8 @@ require("insis").setup({
 },
   golang = {
     enable = true,
-  }
+  },
+  java = {
+    enable = true,
+  },
 })

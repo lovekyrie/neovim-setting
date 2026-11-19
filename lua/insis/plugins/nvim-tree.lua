@@ -59,7 +59,7 @@ if nvimTree and cfg and cfg.enable then
       -- do not hide dot files
       dotfiles = false,
       -- keep frontend env files visible even when they are ignored by git
-      exclude = { "/%.env.*$", "dist" },
+      exclude = { "/%.env.*$", "dist", "target" },
       -- hide node_modules folder
       -- custom = { "node_modules" },
     },
